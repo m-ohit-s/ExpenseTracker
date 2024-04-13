@@ -18,7 +18,6 @@ import com.work.expensetracker.presentation.tracker_app.componenet.NavItemsLoade
 
 @Composable
 fun AppScreen(rootNavHostController: NavHostController){
-    //TODO: Switch to the splitwise type app to be added in settings
     val navHostController = rememberNavController()
     Scaffold(
 

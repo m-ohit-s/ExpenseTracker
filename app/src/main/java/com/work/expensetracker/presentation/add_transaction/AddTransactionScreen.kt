@@ -88,7 +88,6 @@ fun AddTransactionScreen(navHostController: NavHostController){
         //Save Changes
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                //TODO: Save the transaction in DB
                 viewModel.onEvent(AddTransactionEvent.SaveTransaction)
             }) {
                 Icon(imageVector = Icons.Default.Save, contentDescription = null)
