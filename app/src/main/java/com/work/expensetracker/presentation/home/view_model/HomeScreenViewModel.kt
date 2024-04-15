@@ -30,7 +30,6 @@ class HomeScreenViewModel @Inject constructor(
 
     private var incomeJob : Job? = null
     private var expenseJob: Job? = null
-    private var transactionsJob: Job? = null
     private var transactionsByOrderJob: Job? = null
 
     init {
@@ -52,16 +51,6 @@ class HomeScreenViewModel @Inject constructor(
             _expense.doubleValue = it
         }.launchIn(viewModelScope)
     }
-
-    private fun getTransactions(){
-        transactionsJob?.cancel()
-        transactionsJob = useCases.getTransactions().onEach {
-            _transactionsState.value = transactionsState.value.copy(transactions = it.sortedByDescending {transaction->
-                transaction.timestamp
-            })
-        }.launchIn(viewModelScope)
-    }
-
     private fun getTransactionsByOrder(transactionOrder: TransactionOrder){
         transactionsByOrderJob?.cancel()
         transactionsByOrderJob = useCases.getTransactionsByOrder(transactionOrder).onEach {
@@ -78,13 +67,11 @@ class HomeScreenViewModel @Inject constructor(
 
             is HomeEvent.DisplayToday -> {
                 getTransactionsByOrder(TransactionOrder.PresentDay(OrderType.Account))
-                _transactionsState.value = transactionsState.value.copy(filteredBy = HomeDuration.Today)
 
             }
 
             is HomeEvent.DisplayMonthly -> {
                 getTransactionsByOrder(TransactionOrder.PresentMonth(OrderType.Account))
-                _transactionsState.value = transactionsState.value.copy(filteredBy = HomeDuration.Monthly)
             }
         }
     }

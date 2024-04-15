@@ -8,7 +8,7 @@ import com.work.expensetracker.domain.use_case.TransactionOrder
 
 data class TransactionsState(
     val transactions: List<Transaction> = emptyList(),
-    val filteredTransactions: List<Transaction> = emptyList(),
-    val filteredBy: HomeDuration = HomeDuration.Today,
-    val transactionOrder: TransactionOrder = TransactionOrder.All(OrderType.Account)
+//    val filteredTransactions: List<Transaction> = emptyList(),
+//    val filteredBy: HomeDuration = HomeDuration.Today,
+    val transactionOrder: TransactionOrder = TransactionOrder.PresentDay(OrderType.Account)
  )
